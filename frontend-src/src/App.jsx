@@ -48,18 +48,25 @@ const App = () => {
               .then(returnedPerson => {
                 console.log(returnedPerson);
                 setPersons(persons.map(p => p.id !== returnedPerson.id ? p : returnedPerson))
+                setNotification({
+                  message: `Updated ${newName}`,
+                  isError: false
+                })
+    
+                setTimeout(() => {
+                  setNotification({message: ""})
+                }, 2000)
               })
               .catch(e => {
+                console.log(e.response.data.error)
                 setNotification({
-                  message: `Information of ${newName} has already been removed from server`,
+                  message: e.response.data.error,
                   isError: true
                 })
 
                 setTimeout(() => {
-                  setTimeout(() => {
-                    setNotification({message: ""})
-                  }, 2000)
-                })
+                  setNotification({message: ""})
+                }, 2000)
               })
           }
       }
@@ -77,6 +84,17 @@ const App = () => {
             setNotification({
               message: `Added ${newName}`,
               isError: false
+            })
+
+            setTimeout(() => {
+              setNotification({message: ""})
+            }, 2000)
+          })
+          .catch(e => {
+            console.log(e.response.data.error)
+            setNotification({
+              message: e.response.data.error,
+              isError: true
             })
 
             setTimeout(() => {
