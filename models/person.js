@@ -5,10 +5,12 @@ mongoose.set('strictQuery',false)
 const url = process.env.MONGODB_URI
 
 mongoose.connect(url)
-    .then(result => 
-        console.log('connected to MongoDB'))
-    .catch(e => 
-        console.log('error connecting to MongoDB:', e.message))
+    .then(() => {
+        console.log('connected to MongoDB')
+    })
+    .catch(e => {
+        console.log('error connecting to MongoDB:', e.message)
+    })
 
 const numberValidator = {
     validator: number => {
@@ -24,13 +26,13 @@ const numberValidator = {
         }
 
         // part 1 validation (regex is for digits)
-        prefix = parts[0]
+        const prefix = parts[0]
         if (prefix.length < 2 || prefix.length > 3 || !prefix.match(/^\d+$/)) {
-            return false;
+            return false
         }
 
         // part 2 validation
-        postfix = parts[1]
+        const postfix = parts[1]
         if (!postfix.match(/^\d+$/)) {
             return false
         }

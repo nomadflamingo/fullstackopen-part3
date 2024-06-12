@@ -118,7 +118,7 @@ const App = () => {
       .remove(id)
       .then(() => 
         setPersons(persons.filter(p => p.id !== id)))
-      .catch(e => {
+      .catch(() => {
         alert(
           `failed to delete ${person.name} from the server`
         )
